@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Chevignon Sandiego</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/img/styles/estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="logo">
+        <span>CHEVIGNON</span>
+        <small>Sucursal Sandiego</small>
+    </div>
+    <ul>
+        <li><a href="home.html" class="activo">📊 <span>Dashboard</span></a></li>
+        <li><a href="ventas.html">🛍 <span>Registrar Venta</span></a></li>
+    </ul>
+    <div class="cerrar">
+        <a href="#" onclick="salirYa()">🚪 Cerrar sesión</a>
+    </div>
+</aside>
+
+<main class="contenido">
+
+    <div class="encabezado">
+        <div>
+            <h2 id="saludo">Bienvenidos </h2>
+            <p>Resumen de ventas — Chevignon</p>
+        </div>
+        <div class="usuario">
+            <div class="circulo" id="avatar">JT</div>
+            <span id="nombre-usr">Cargando...</span>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3">
+            <div class="tarjeta">
+                <div style="font-size:1.5rem">💰</div>
+                <div class="numero" id="total-ventas">$0</div>
+                <div class="etiqueta">Total en ventas</div>
+                <div class="tendencia" id="trend-ventas">0 registros</div>
+            </div>
+        </div>
+        <div class="col-6 col-xl-3">
+            <div class="tarjeta">
+                <div style="font-size:1.5rem">🛍</div>
+                <div class="numero" id="num-trans">0</div>
+                <div class="etiqueta">Transacciones</div>
+                <div class="tendencia">este mes</div>
+            </div>
+        </div>
+        <div class="col-6 col-xl-3">
+            <div class="tarjeta">
+                <div style="font-size:1.5rem">👥</div>
+                <div class="numero">5</div>
+                <div class="etiqueta">Vendedoras activas</div>
+                <div class="tendencia">Sucursal Sandiego</div>
+            </div>
+        </div>
+        <div class="col-6 col-xl-3">
+            <div class="tarjeta">
+                <div style="font-size:1.5rem">⭐</div>
+                <div class="numero" id="top-nombre" style="font-size:1.2rem">—</div>
+                <div class="etiqueta">Top vendedora</div>
+                <div class="tendencia" id="top-monto">sin datos</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-lg-7">
+            <div class="caja-blanca">
+                <h5>Ventas por vendedor</h5>
+                <canvas id="graficoBarra" height="180"></canvas>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5">
+            <div class="caja-blanca">
+                <h5>Distribución</h5>
+                <canvas id="graficoTorta" height="180"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div style="background:white;border-radius:14px;box-shadow:0 4px 20px rgba(26,58,42,0.08);overflow:hidden">
+        <div style="padding:16px 20px;border-bottom:1px solid #f0f4f1;display:flex;justify-content:space-between;align-items:center">
+            <h5 style="margin:0;color:#1a3a2a;font-size:1rem">Ventas recientes</h5>
+            <a href="ventas.html"
+               style="background:#2d6a4f;color:white;padding:8px 16px;border-radius:10px;
+                      text-decoration:none;font-size:0.83rem;font-weight:600">
+                + Nueva venta
+            </a>
+        </div>
+        <div class="tabla">
+            <table class="table tabla-ventas mb-0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Vendedor/a</th>
+                        <th>Fecha</th>
+                        <th>Local</th>
+                        <th>Productos</th>
+                        <th>Pago</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-body">
+                    <tr>
+                        <td colspan="7" style="text-align:center;padding:26px;color:#5a6e61">
+                            Aún no hay ventas 🌱 — <a href="ventas.html" style="color:#2d6a4f;font-weight:600">Registra la primera</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+<script>
+    let miGraficoBarra = null;
+    let miGraficoTorta = null;
+
+    const miToast = Swal.mixin({
+        toast: true, position: 'top-end',
+        showConfirmButton: false, timer: 3000, timerProgressBar: true,
+        didOpen: (toast) => { 
+            toast.onmouseenter = Swal.stopTimer; 
+            toast.onmouseleave = Swal.resumeTimer; 
+        }
+    });
+
+    window.addEventListener('load', () => {
+        const datosSesion = JSON.parse(localStorage.getItem('sesion') || 'null');
+        if (!datosSesion) { 
+            window.location.href = 'login.html'; 
+            return; 
+        }
+
+        // saludo dependiendo de la hora
+        const horaActual = new Date().getHours();
+        const miSaludo = horaActual < 12 ? 'Buenos días' : horaActual < 19 ? 'Buenas tardes' : 'Buenas noches';
+        document.getElementById('saludo').textContent = `${miSaludo}, ${datosSesion.nombre} `;
+        document.getElementById('nombre-usr').textContent = datosSesion.nombre + ' ' + datosSesion.apellido.charAt(0) + '.';
+        document.getElementById('avatar').textContent = datosSesion.nombre.charAt(0) + datosSesion.apellido.charAt(0);
+
+        
+        cargarMisDatos();
+    });
+
+    function cargarMisDatos() {
+        const listaVentas = JSON.parse(localStorage.getItem('ventas') || '[]');
+        const sumaTotal = listaVentas.reduce((acum, venta) => acum + venta.total, 0);
+
+        document.getElementById('total-ventas').textContent = '$' + sumaTotal.toLocaleString('es-CO');
+        document.getElementById('num-trans').textContent = listaVentas.length;
+        document.getElementById('trend-ventas').textContent = listaVentas.length + ' transacciones';
+
+        // calcular ventas por cada vendedor
+        const ventasPorVendedor = {};
+        listaVentas.forEach(venta => { 
+            ventasPorVendedor[venta.vendedor] = (ventasPorVendedor[venta.vendedor] || 0) + venta.total; 
+        });
+
+        if (Object.keys(ventasPorVendedor).length > 0) {
+            const laMejor = Object.entries(ventasPorVendedor).sort((a, b) => b[1] - a[1])[0];
+            document.getElementById('top-nombre').textContent = laMejor[0].split(' ')[0];
+            document.getElementById('top-monto').textContent = '$' + laMejor[1].toLocaleString('es-CO');
+        }
+
+        // datos para las graficas
+        const nombresVendedores = Object.keys(ventasPorVendedor).map(n => n.split(' ')[0]);
+        const montosVentas = Object.values(ventasPorVendedor);
+        const misColores = ['#1a3a2a', '#2d6a4f', '#95d5b2', '#52b788'];
+
+        // destruir graficas viejas si existen
+        if (miGraficoBarra) miGraficoBarra.destroy();
+        if (miGraficoTorta) miGraficoTorta.destroy();
+
+        // grafica de barras
+        miGraficoBarra = new Chart(document.getElementById('graficoBarra'), {
+            type: 'bar',
+            data: {
+                labels: nombresVendedores.length ? nombresVendedores : ['Sin datos'],
+                datasets: [{ 
+                    data: montosVentas.length ? montosVentas : [0], 
+                    backgroundColor: misColores, 
+                    borderRadius: 8, 
+                    borderSkipped: false 
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { 
+                        grid: { color: '#f0f4f1' }, 
+                        ticks: { 
+                            callback: v => '$' + (v >= 1000000 ? (v/1000000).toFixed(1)+'M' : (v/1000).toFixed(0)+'K') 
+                        } 
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // grafica de torta
+        miGraficoTorta = new Chart(document.getElementById('graficoTorta'), {
+            type: 'doughnut',
+            data: {
+                labels: nombresVendedores.length ? nombresVendedores : ['Sin datos'],
+                datasets: [{ 
+                    data: montosVentas.length ? montosVentas : [1], 
+                    backgroundColor: montosVentas.length ? misColores : ['#cce0d4'], 
+                    borderWidth: 0 
+                }]
+            },
+            options: { 
+                responsive: true, 
+                cutout: '62%', 
+                plugins: { legend: { position: 'bottom' } } 
+            }
+        });
+
+        // llenar tabla de ventas recientes
+        const cuerpoTabla = document.getElementById('tabla-body');
+        if (listaVentas.length === 0) {
+            cuerpoTabla.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:26px;color:#5a6e61">
+                Aún no hay ventas  — <a href="ventas.html" style="color:#2d6a4f;font-weight:600">Registra la primera</a>
+            </td></tr>`;
+            return;
+        }
+
+        cuerpoTabla.innerHTML = [...listaVentas].reverse().slice(0, 10).map(venta => `
+            <tr>
+                <td style="color:#5a6e61;font-weight:600">#${String(venta.id).padStart(3,'0')}</td>
+                <td><strong>${venta.vendedor}</strong></td>
+                <td>${ponerFechaBonita(venta.fecha)}</td>
+                <td>${venta.local}</td>
+                <td style="font-size:0.8rem;color:#5a6e61">${venta.productos.map(p => p.nombre.split(' ').slice(0,2).join(' ') + ' x'+p.cantidad).join(', ')}</td>
+                <td><span class="badge">${venta.pago}</span></td>
+                <td style="font-weight:700;color:#2d6a4f">$${venta.total.toLocaleString('es-CO')}</td>
+            </tr>
+        `).join('');
+    }
+
+    // funcion para formatear la fecha como me gusta
+    function ponerFechaBonita(fecha) {
+        const [anio, mes, dia] = fecha.split('-');
+        const mesesCortos = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+        return `${dia} ${mesesCortos[mes-1]} ${anio}`;
+    }
+
+    // para cerrar sesion
+    async function salirYa() {
+        const respuesta = await Swal.fire({
+            title: '¿Cerrar sesión?', 
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#e63946', 
+            cancelButtonColor: '#95d5b2',
+            confirmButtonText: 'Sí, salir', 
+            cancelButtonText: 'Cancelar'
+        });
+        if (respuesta.isConfirmed) {
+            localStorage.removeItem('sesion');
+            window.location.href = 'login.html';
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

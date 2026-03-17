@@ -1,0 +1,287 @@
+/* ───────── GENERAL ───────── */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f6f5;
+    margin: 0;
+    color: #1a3a2a;
+}
+
+button {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+/* ───────── LOGIN ───────── */
+.pagina-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.caja-form {
+    background: #ffffff;
+    padding: 30px 35px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 350px;
+}
+
+.caja-form h2 {
+    margin-bottom: 8px;
+    color: #1a3a2a;
+}
+
+.texto-gris {
+    font-size: 0.85rem;
+    color: #5a6e61;
+    margin-bottom: 20px;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.campo input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #cce0d4;
+    font-size: 0.88rem;
+    outline: none;
+}
+
+.campo input:focus {
+    border-color: #2d6a4f;
+}
+
+.btn-principal {
+    width: 100%;
+    padding: 11px 0;
+    background: #2d6a4f;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.btn-principal:hover {
+    background: #22603a;
+}
+
+.btn-secundario {
+    width: 100%;
+    padding: 11px 0;
+    background: #cce0d4;
+    border: none;
+    border-radius: 10px;
+    color: #1a3a2a;
+    font-weight: 500;
+}
+
+.panel {
+    display: none;
+}
+
+.panel.activo {
+    display: block;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;       /* Más espacio entre banner y formulario */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-banner {
+    flex: 9;         /* Que ocupe más espacio */
+    max-width: 100%;/* Máximo ancho del banner */
+}
+
+.login-banner img {
+    width: 100%;
+    height: 100%;    /* Mantiene proporción */
+    border-radius: 15px;
+    object-fit: cover;
+}
+/* ───────── REGISTRAR VENTA ───────── */
+.contenido {
+    margin-left: 220px;
+    padding: 25px 30px;
+}
+
+.sidebar {
+    position: fixed;
+    width: 220px;
+    height: 100%;
+    background: #2d6a4f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+.sidebar ul li a.activo {
+    background: #22603a;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.sidebar .cerrar {
+    margin: 20px;
+    font-size: 0.9rem;
+}
+
+.form-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-card h3 {
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    font-size: 0.85rem;
+    color: #5a6e61;
+    margin-bottom: 15px;
+}
+
+.campo button {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #cce0d4;
+    text-align: left;
+    font-size: 0.88rem;
+    color: #5a6e61;
+    background: white;
+}
+
+.campo input[type=number],
+.campo input[readonly] {
+    width: 100%;
+    padding: 9px;
+    border-radius: 10px;
+    border: 1.5px solid #cce0d4;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.caja-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 10px 15px;
+    background: #f9fbf9;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.fila-prod {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-agregar {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 10px;
+    background: #cce0d4;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.btn-quitar {
+    background: #f08080;
+    border: none;
+    color: white;
+    border-radius: 8px;
+}
+
+.campo input[type=text] {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #cce0d4;
+    font-size: 0.88rem;
+    outline: none;
+}
+
+/* ───────── ENCABEZADO ───────── */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.usuario .circulo {
+    width: 35px;
+    height: 35px;
+    background: #2d6a4f;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+}
+
+/* ───────── OTROS ───────── */
+.col-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    margin-bottom: 5px;
+    color: #5a6e61;
+}
