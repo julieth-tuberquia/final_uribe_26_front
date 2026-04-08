@@ -1,257 +1,380 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chevignon - Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/img/styles/estilos.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/img/styles/estilos.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
-
-<div class="pagina-login">
-    <!-- Contenedor flex para banner + login -->
-    <div class="login-container">
-
+  </head>
+  <body>
+    <div class="pagina-login">
+      <!-- Contenedor flex para banner + login -->
+      <div class="login-container">
         <!-- BANNER -->
-       <div class="pagina-login">
-    <div class="login-banner">
-        <div class="login-banner-text">
-             
-         
-            <img src="../assets/img/banner2.jpg" alt="Banner Chevignon">
+        <div class="login-banner">
+          <div class="login-banner-text">
+            <img
+              src="../assets/img/banner2.jpg"
+              alt="Banner Chevignon"
+              class="img-login"
+            />
+          </div>
         </div>
-    </div>
-
-    <div class="caja-form">
 
         <!-- CAJA DE FORMULARIOS -->
         <div class="caja-form">
-
-            <!-- PANEL DE LOGIN -->
-            <div class="panel activo" id="panel-login">
-                <h2>Iniciar sesión</h2>
-                <p class="texto-gris">Ingresa tus datos para continuar</p>
-                <div class="campo">
-                    <label>Correo</label>
-                    <input type="email" id="login-email" placeholder="tucorreo@chevignon.com">
-                </div>
-                <div class="campo">
-                    <label>Contraseña</label>
-                    <input type="password" id="login-pass" placeholder="••••••••">
-                </div>
-                <div class="d-flex justify-content-between mb-3" style="font-size:0.82rem">
-                    <label style="cursor:pointer; color:#5a6e61">
-                        <input type="checkbox" id="recordar" style="accent-color:#2d6a4f"> Recordarme
-                    </label>
-                    <a href="#" onclick="mostrarPanel('panel-recuperar')">¿Olvidé mi contraseña?</a>
-                </div>
-                <button class="btn-principal" onclick="iniciarSesion()">Entrar</button>
-                <p class="text-center" style="font-size:0.86rem; color:#5a6e61; margin-top:15px">
-                    ¿No tienes cuenta? <a href="#" onclick="mostrarPanel('panel-registro')">Regístrate</a>
-                </p>
+          <!-- PANEL DE LOGIN -->
+          <div class="panel activo" id="panel-login">
+            <h2>Iniciar sesión</h2>
+            <p class="texto-gris">Ingresa tus datos para continuar</p>
+            <div class="campo">
+              <label>Correo</label>
+              <input
+                type="email"
+                id="login-email"
+                placeholder="tucorreo@chevignon.com"
+              />
             </div>
-
-            <!-- PANEL DE REGISTRO -->
-            <div class="panel" id="panel-registro">
-                <h2>Crear cuenta</h2>
-                <p class="texto-gris">Completa los datos para registrarte</p>
-                <div class="row g-2">
-                    <div class="col-6">
-                        <div class="campo">
-                            <label>Nombre</label>
-                            <input type="text" id="reg-nombre" placeholder="Tu nombre">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="campo">
-                            <label>Apellido</label>
-                            <input type="text" id="reg-apellido" placeholder="Tu apellido">
-                        </div>
-                    </div>
-                </div>
-                <div class="campo">
-                    <label>Correo</label>
-                    <input type="email" id="reg-email" placeholder="tucorreo@chevignon.com">
-                </div>
-                <div class="campo">
-                    <label>Rol en la tienda</label>
-                    <button type="button" onclick="elegirRol()" 
-                        style="width:100%;padding:11px 13px;border:1.5px solid #cce0d4;border-radius:10px;background:white;text-align:left;font-family:'Poppins',sans-serif;font-size:0.88rem;color:#5a6e61;cursor:pointer;">
-                        👤 <span id="rol-texto">Seleccionar rol</span>
-                    </button>
-                    <input type="hidden" id="reg-rol">
-                </div>
-                <div class="campo">
-                    <label>Contraseña</label>
-                    <input type="password" id="reg-pass" placeholder="Mínimo 8 caracteres">
-                </div>
-                <div class="campo">
-                    <label>Confirmar contraseña</label>
-                    <input type="password" id="reg-pass2" placeholder="Repite la contraseña">
-                </div>
-                <button class="btn-principal" onclick="registrar()">Crear cuenta</button>
-                <p class="text-center" style="font-size:0.86rem; color:#5a6e61; margin-top:15px">
-                    ¿Ya tienes cuenta? <a href="#" onclick="mostrarPanel('panel-login')">Inicia sesión</a>
-                </p>
+            <div class="campo">
+              <label>Contraseña</label>
+              <input type="password" id="login-pass" placeholder="••••••••" />
             </div>
-
-            <!-- PANEL DE RECUPERACIÓN -->
-            <div class="panel" id="panel-recuperar">
-                <div id="paso1">
-                    <h2>¿Olvidaste tu contraseña?</h2>
-                    <p class="texto-gris">Te enviamos un enlace a tu correo para recuperarla</p>
-                    <div class="campo">
-                        <label>Correo</label>
-                        <input type="email" id="rec-email" placeholder="tucorreo@chevignon.com">
-                    </div>
-                    <button class="btn-principal mb-3" onclick="enviarRecuperacion()">Enviar enlace</button>
-                    <p class="text-center" style="font-size:0.85rem; color:#5a6e61">
-                        <a href="#" onclick="mostrarPanel('panel-login')">← Volver</a>
-                    </p>
-                </div>
-                <div id="paso2" style="display:none; text-align:center; padding:10px 0">
-                    <div style="font-size:3rem; margin-bottom:12px">📬</div>
-                    <h2>¡Revisa tu correo!</h2>
-                    <p class="texto-gris" style="margin-top:8px">Enviamos el enlace a <strong id="correo-enviado"></strong></p>
-                    <button class="btn-principal mt-4" onclick="mostrarPanel('panel-login')">Volver al login</button>
-                </div>
+            <div
+              class="d-flex justify-content-between mb-4"
+              style="font-size: 0.82rem"
+            >
+              <label style="cursor: pointer; color: #5a6e61">
+                <input
+                  type="checkbox"
+                  id="recordar"
+                  style="accent-color: #2d6a4f"
+                />
+                Recordarme
+              </label>
+              <a href="#" onclick="mostrarPanel('panel-recuperar')"
+                >¿Olvidé mi contraseña?</a
+              >
             </div>
-<script>
+            <button class="btn-principal" onclick="iniciarSesion()">
+              Entrar
+            </button>
+            <p
+              class="text-center"
+              style="font-size: 0.86rem; color: #5a6e61; margin-top: 15px"
+            >
+              ¿No tienes cuenta?
+              <a href="#" onclick="mostrarPanel('panel-registro')"
+                >Regístrate</a
+              >
+            </p>
+          </div>
 
-    // Cambiar paneles
-    function mostrarPanel(idPanel) {
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('activo'));
-        document.getElementById(idPanel).classList.add('activo');
-    }
+          <!-- PANEL DE REGISTRO -->
+          <div class="panel" id="panel-registro">
+            <h2>Crear cuenta</h2>
+            <p class="texto-gris">Completa los datos para registrarte</p>
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="campo">
+                  <label>Nombre</label>
+                  <input type="text" id="reg-nombre" placeholder="Tu nombre" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="campo">
+                  <label>Apellido</label>
+                  <input
+                    type="text"
+                    id="reg-apellido"
+                    placeholder="Tu apellido"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="campo">
+              <label>Correo</label>
+              <input
+                type="email"
+                id="reg-email"
+                placeholder="tucorreo@chevignon.com"
+              />
+            </div>
+            <div class="campo">
+              <label>Rol en la tienda</label>
+              <button
+                type="button"
+                onclick="elegirRol()"
+                style="
+                  width: 100%;
+                  padding: 11px 13px;
+                  border: 1.5px solid #cce0d4;
+                  border-radius: 10px;
+                  background: white;
+                  text-align: left;
+                  font-family: &quot;Poppins&quot;, sans-serif;
+                  font-size: 0.88rem;
+                  color: #5a6e61;
+                  cursor: pointer;
+                "
+              >
+                👤 <span id="rol-texto">Seleccionar rol</span>
+              </button>
+              <input type="hidden" id="reg-rol" />
+            </div>
+            <div class="campo">
+              <label>Contraseña</label>
+              <input
+                type="password"
+                id="reg-pass"
+                placeholder="Mínimo 8 caracteres"
+              />
+            </div>
+            <div class="campo">
+              <label>Confirmar contraseña</label>
+              <input
+                type="password"
+                id="reg-pass2"
+                placeholder="Repite la contraseña"
+              />
+            </div>
+            <button class="btn-principal" onclick="registrar()">
+              Crear cuenta
+            </button>
+            <p
+              class="text-center"
+              style="font-size: 0.86rem; color: #5a6e61; margin-top: 15px"
+            >
+              ¿Ya tienes cuenta?
+              <a href="#" onclick="mostrarPanel('panel-login')"
+                >Inicia sesión</a
+              >
+            </p>
+          </div>
 
-    // Elegir rol
-    async function elegirRol() {
+          <!-- PANEL DE RECUPERACIÓN -->
+          <div class="panel" id="panel-recuperar">
+            <div id="paso1">
+              <h2>¿Olvidaste tu contraseña?</h2>
+              <p class="texto-gris">
+                Te enviamos un enlace a tu correo para recuperarla
+              </p>
+              <div class="campo">
+                <label>Correo</label>
+                <input
+                  type="email"
+                  id="rec-email"
+                  placeholder="tucorreo@chevignon.com"
+                />
+              </div>
+              <button class="btn-principal mb-3" onclick="enviarRecuperacion()">
+                Enviar enlace
+              </button>
+              <p class="text-center" style="font-size: 0.85rem; color: #5a6e61">
+                <a href="#" onclick="mostrarPanel('panel-login')">Volver</a>
+              </p>
+            </div>
+            <div
+              id="paso2"
+              style="display: none; text-align: center; padding: 10px 0"
+            >
+              <div style="font-size: 3rem; margin-bottom: 12px">📬</div>
+              <h2>¡Revisa tu correo!</h2>
+              <p class="texto-gris" style="margin-top: 8px">
+                Enviamos el enlace a <strong id="correo-enviado"></strong>
+              </p>
+              <button
+                class="btn-principal mt-4"
+                onclick="mostrarPanel('panel-login')"
+              >
+                Volver al login
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts al final del body (CORREGIDO) -->
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+
+      // Cambiar paneles
+      function mostrarPanel(idPanel) {
+        document
+          .querySelectorAll(".panel")
+          .forEach((p) => p.classList.remove("activo"));
+        document.getElementById(idPanel).classList.add("activo");
+      }
+
+      // Elegir rol
+      async function elegirRol() {
         const { value: rol } = await Swal.fire({
-            title: '¿Cuál es tu rol?',
-            input: 'select',
-            inputOptions: {
-                'Tienda': { vendedor: '🛍 Vendedor/a', supervisor: '📋 Supervisor/a' },
-                'Admin': { admin: '⚙️ Administrador/a', gerente: '👑 Gerente' }
+          title: "¿Cuál es tu rol?",
+          input: "select",
+          inputOptions: {
+            Tienda: {
+              vendedor: "🛍 Vendedor/a",
+              supervisor: "📋 Supervisor/a",
             },
-            inputPlaceholder: '— Selecciona tu rol —',
-            showCancelButton: true,
-            confirmButtonColor: '#2d6a4f'
+            Admin: { admin: "⚙️ Administrador/a", gerente: "👑 Gerente" },
+          },
+          inputPlaceholder: "— Selecciona tu rol —",
+          showCancelButton: true,
+          confirmButtonColor: "#2d6a4f",
         });
         if (rol) {
-            const textos = { vendedor: '🛍 Vendedor/a', supervisor: '📋 Supervisor/a', 
-                           admin: '⚙️ Administrador/a', gerente: '👑 Gerente' };
-            document.getElementById('reg-rol').value = rol;
-            document.getElementById('rol-texto').textContent = textos[rol];
+          const textos = {
+            vendedor: "🛍 Vendedor/a",
+            supervisor: "📋 Supervisor/a",
+            admin: "⚙️ Administrador/a",
+            gerente: "👑 Gerente",
+          };
+          document.getElementById("reg-rol").value = rol;
+          document.getElementById("rol-texto").textContent = textos[rol];
         }
-    }
+      }
 
-    // Login
-    function iniciarSesion() {
-        const email = document.getElementById('login-email').value.trim();
-        const pass = document.getElementById('login-pass').value;
+      // Login
+      function iniciarSesion() {
+        const email = document.getElementById("login-email").value.trim();
+        const pass = document.getElementById("login-pass").value;
 
         if (!email || !pass) {
-            Swal.fire({ icon: 'warning', title: 'Faltan datos', 
-                       text: 'Correo y contraseña requeridos', 
-                       confirmButtonColor: '#2d6a4f' });
-            return;
+          Swal.fire({
+            icon: "warning",
+            title: "Faltan datos",
+            text: "Correo y contraseña requeridos",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
-        const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-        const user = usuarios.find(u => u.email === email && u.password === pass);
+        const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+        const user = usuarios.find(
+          (u) => u.email === email && u.password === pass,
+        );
 
         if (!user) {
-            Swal.fire({ icon: 'error', title: 'Error', 
-                       text: 'Correo o contraseña incorrectos', 
-                       confirmButtonColor: '#2d6a4f' });
-            return;
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Correo o contraseña incorrectos",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
-        if (document.getElementById('recordar').checked) {
-            localStorage.setItem('recordar-email', email);
+        if (document.getElementById("recordar").checked) {
+          localStorage.setItem("recordar-email", email);
         }
-        localStorage.setItem('sesion', JSON.stringify(user));
-        Toast.fire({ icon: 'success', title: `¡Hola ${user.nombre}!` });
-        setTimeout(() => window.location.href = 'home.html', 1200);
-    }
+        localStorage.setItem("sesion", JSON.stringify(user));
+        Toast.fire({ icon: "success", title: `¡Hola ${user.nombre}!` });
+        setTimeout(() => (window.location.href = "home.html"), 1200);
+      }
 
-    // Registro
-    function registrar() {
-        const nombre = document.getElementById('reg-nombre').value.trim();
-        const apellido = document.getElementById('reg-apellido').value.trim();
-        const email = document.getElementById('reg-email').value.trim();
-        const rol = document.getElementById('reg-rol').value;
-        const pass = document.getElementById('reg-pass').value;
-        const pass2 = document.getElementById('reg-pass2').value;
+      // Registro
+      function registrar() {
+        const nombre = document.getElementById("reg-nombre").value.trim();
+        const apellido = document.getElementById("reg-apellido").value.trim();
+        const email = document.getElementById("reg-email").value.trim();
+        const rol = document.getElementById("reg-rol").value;
+        const pass = document.getElementById("reg-pass").value;
+        const pass2 = document.getElementById("reg-pass2").value;
 
         if (!nombre || !apellido || !email || !rol || !pass || !pass2) {
-            Swal.fire({ icon: 'warning', title: 'Faltan datos', 
-                       text: 'Completa todos los campos', 
-                       confirmButtonColor: '#2d6a4f' });
-            return;
+          Swal.fire({
+            icon: "warning",
+            title: "Faltan datos",
+            text: "Completa todos los campos",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
         if (pass !== pass2) {
-            Swal.fire({ icon: 'error', title: 'Error', 
-                       text: 'Contraseñas no coinciden', 
-                       confirmButtonColor: '#2d6a4f' });
-            return;
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Contraseñas no coinciden",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
         if (pass.length < 8) {
-            Swal.fire({ icon: 'warning', title: 'Contraseña corta', 
-                       text: 'Mínimo 8 caracteres', 
-                       confirmButtonColor: '#2d6a4f' });
-            return;
+          Swal.fire({
+            icon: "warning",
+            title: "Contraseña corta",
+            text: "Mínimo 8 caracteres",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
-        const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-        if (usuarios.find(u => u.email === email)) {
-            Swal.fire({ icon: 'error', title: 'Error', 
-                       text: 'Correo ya registrado', 
-                       confirmButtonColor: '#2d6a4f' });
-            return;
+        const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+        if (usuarios.find((u) => u.email === email)) {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Correo ya registrado",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
         usuarios.push({ nombre, apellido, email, rol, password: pass });
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        Toast.fire({ icon: 'success', title: `¡Cuenta creada ${nombre}!` });
-        setTimeout(() => mostrarPanel('panel-login'), 1500);
-    }
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        Toast.fire({ icon: "success", title: `¡Cuenta creada ${nombre}!` });
+        setTimeout(() => mostrarPanel("panel-login"), 1500);
+      }
 
-    // Recuperación
-    function enviarRecuperacion() {
-        const email = document.getElementById('rec-email').value.trim();
+      // Recuperación
+      function enviarRecuperacion() {
+        const email = document.getElementById("rec-email").value.trim();
         if (!email) {
-            Swal.fire({ icon: 'warning', title: 'Falta correo', 
-                       confirmButtonColor: '#2d6a4f' });
-            return;
+          Swal.fire({
+            icon: "warning",
+            title: "Falta correo",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
-        const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-        if (!usuarios.find(u => u.email === email)) {
-            Swal.fire({ icon: 'error', title: 'Correo no encontrado', 
-                       confirmButtonColor: '#2d6a4f' });
-            return;
+        const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+        if (!usuarios.find((u) => u.email === email)) {
+          Swal.fire({
+            icon: "error",
+            title: "Correo no encontrado",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
-        document.getElementById('correo-enviado').textContent = email;
-        document.getElementById('paso1').style.display = 'none';
-        document.getElementById('paso2').style.display = 'block';
-    }
+        document.getElementById("correo-enviado").textContent = email;
+        document.getElementById("paso1").style.display = "none";
+        document.getElementById("paso2").style.display = "block";
+      }
 
-    // Cargar email recordado
-    window.onload = () => {
-        const email = localStorage.getItem('recordar-email');
+      // Cargar email recordado
+      window.onload = () => {
+        const email = localStorage.getItem("recordar-email");
         if (email) {
-            document.getElementById('login-email').value = email;
-            document.getElementById('recordar').checked = true;
+          document.getElementById("login-email").value = email;
+          document.getElementById("recordar").checked = true;
         }
-    }
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

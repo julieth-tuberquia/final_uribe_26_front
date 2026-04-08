@@ -1,288 +1,377 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar Venta - Chevignon</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/img/styles/estilos.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/img/styles/estilos.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
-
-<aside class="sidebar">
-    <div class="logo">
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="logo">
         <span>CHEVIGNON</span>
+        <hr />
         <small>Sucursal Sandiego</small>
-    </div>
-    <ul>
-        <li><a href="home.html">📊 <span>Dashboard</span></a></li>
-        <li><a href="ventas.html" class="activo">🛍 <span>Registrar Venta</span></a></li>
-    </ul>
-    <div class="cerrar">
+      </div>
+      <ul>
+        <li>
+          <a href="home.html">📊 <span>Dashboard</span></a>
+        </li>
+        <li>
+          <a href="ventas.html" class="activo"
+            >🛍 <span>Registrar Venta</span></a
+          >
+        </li>
+      </ul>
+      <div class="cerrar">
         <a href="#" onclick="cerrarSesion()">🚪 Cerrar sesión</a>
-    </div>
-</aside>
+      </div>
+    </aside>
 
-<main class="contenido">
-
-    <div class="encabezado">
+    <main class="contenido">
+      <div class="encabezado">
         <div>
-            <h2>Registrar Venta 🛍</h2>
-            <p>Ingresa los datos de la venta</p>
+          <h2>Registrar Venta 🛍</h2>
+          <p>Ingresa los datos de la venta</p>
         </div>
         <div class="usuario">
-            <div class="circulo" id="avatar">JT</div>
-            <span id="nombre-usr">Cargando...</span>
+          <div class="circulo" id="avatar">0</div>
+          <span id="nombre-usr">Cargando...</span>
         </div>
-    </div>
+      </div>
 
-    <div class="form-card">
+      <div class="form-card">
         <h3>Nueva venta</h3>
         <p class="subtitulo">Tienda Chevignon — Sucursal Sandiego</p>
 
         <div class="row g-3 mb-2">
-            <div class="col-md-6">
-                <div class="campo">
-                    <label>Vendedor/a *</label>
-                    <button type="button" onclick="elegirVendedor()"
-                        style="width:100%;padding:11px 13px;border:1.5px solid #cce0d4;
-                               border-radius:10px;background:white;text-align:left;
-                               font-family:'Poppins',sans-serif;font-size:0.88rem;color:#5a6e61;cursor:pointer;">
-                        👤 <span id="txt-vendedor">Seleccionar vendedor</span>
-                    </button>
-                    <input type="hidden" id="vendedor">
-                </div>
+          <div class="col-md-6">
+            <div class="campo">
+              <label>Vendedor/a *</label>
+              <button
+                type="button"
+                onclick="elegirVendedor()"
+                style="
+                  width: 100%;
+                  padding: 11px 13px;
+                  border: 1.5px solid #cce0d4;
+                  border-radius: 10px;
+                  background: white;
+                  text-align: left;
+                  font-family: &quot;Poppins&quot;, sans-serif;
+                  font-size: 0.88rem;
+                  color: #5a6e61;
+                  cursor: pointer;
+                "
+              >
+                👤 <span id="txt-vendedor">Seleccionar vendedor</span>
+              </button>
+              <input type="hidden" id="vendedor" />
             </div>
-            <div class="col-md-6">
-                <div class="campo">
-                    <label>Fecha *</label>
-                    <button type="button" onclick="elegirFecha()"
-                        style="width:100%;padding:11px 13px;border:1.5px solid #cce0d4;
-                               border-radius:10px;background:white;text-align:left;
-                               font-family:'Poppins',sans-serif;font-size:0.88rem;color:#5a6e61;cursor:pointer;">
-                        📅 <span id="txt-fecha">Seleccionar fecha</span>
-                    </button>
-                    <input type="hidden" id="fecha-valor">
-                </div>
+          </div>
+          <div class="col-md-6">
+            <div class="campo">
+              <label>Fecha *</label>
+              <button
+                type="button"
+                onclick="elegirFecha()"
+                style="
+                  width: 100%;
+                  padding: 11px 13px;
+                  border: 1.5px solid #cce0d4;
+                  border-radius: 10px;
+                  background: white;
+                  text-align: left;
+                  font-family: &quot;Poppins&quot;, sans-serif;
+                  font-size: 0.88rem;
+                  color: #5a6e61;
+                  cursor: pointer;
+                "
+              >
+                📅 <span id="txt-fecha">Seleccionar fecha</span>
+              </button>
+              <input type="hidden" id="fecha-valor" />
             </div>
+          </div>
         </div>
 
         <div class="row g-3 mb-2">
-            <div class="col-md-6">
-                <div class="campo">
-                    <label>Local *</label>
-                    <button type="button" onclick="elegirLocal()"
-                        style="width:100%;padding:11px 13px;border:1.5px solid #cce0d4;
-                               border-radius:10px;background:white;text-align:left;
-                               font-family:'Poppins',sans-serif;font-size:0.88rem;color:#5a6e61;cursor:pointer;">
-                        🏪 <span id="txt-local">Seleccionar local</span>
-                    </button>
-                    <input type="hidden" id="local">
-                </div>
+          <div class="col-md-6">
+            <div class="campo">
+              <label>Local *</label>
+              <button
+                type="button"
+                onclick="elegirLocal()"
+                style="
+                  width: 100%;
+                  padding: 11px 13px;
+                  border: 1.5px solid #cce0d4;
+                  border-radius: 10px;
+                  background: white;
+                  text-align: left;
+                  font-family: &quot;Poppins&quot;, sans-serif;
+                  font-size: 0.88rem;
+                  color: #5a6e61;
+                  cursor: pointer;
+                "
+              >
+                🏪 <span id="txt-local">Seleccionar local</span>
+              </button>
+              <input type="hidden" id="local" />
             </div>
-            <div class="col-md-6">
-                <div class="campo">
-                    <label>Método de pago *</label>
-                    <button type="button" onclick="elegirPago()"
-                        style="width:100%;padding:11px 13px;border:1.5px solid #cce0d4;
-                               border-radius:10px;background:white;text-align:left;
-                               font-family:'Poppins',sans-serif;font-size:0.88rem;color:#5a6e61;cursor:pointer;">
-                        💳 <span id="txt-pago">Seleccionar método</span>
-                    </button>
-                    <input type="hidden" id="pago">
-                </div>
+          </div>
+          <div class="col-md-6">
+            <div class="campo">
+              <label>Método de pago *</label>
+              <button
+                type="button"
+                onclick="elegirPago()"
+                style="
+                  width: 100%;
+                  padding: 11px 13px;
+                  border: 1.5px solid #cce0d4;
+                  border-radius: 10px;
+                  background: white;
+                  text-align: left;
+                  font-family: &quot;Poppins&quot;, sans-serif;
+                  font-size: 0.88rem;
+                  color: #5a6e61;
+                  cursor: pointer;
+                "
+              >
+                💳 <span id="txt-pago">Seleccionar método</span>
+              </button>
+              <input type="hidden" id="pago" />
             </div>
+          </div>
         </div>
 
-        <label style="font-size:0.78rem;font-weight:600;color:#1a3a2a;text-transform:uppercase;letter-spacing:0.4px">
-            Productos 
+        <label
+          style="
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #1a3a2a;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+          "
+        >
+          Productos
         </label>
 
         <div class="col-header mt-2">
-            <span>Producto</span>
-            <span>Cant.</span>
-            <span>Precio</span>
-            <span></span>
+          <span>Producto</span>
+          <span>Cant.</span>
+          <span>Precio</span>
+          <span></span>
         </div>
 
         <div id="lista-productos"></div>
-        <button class="btn-agregar" onclick="agregarFila()">+ Agregar producto</button>
+        <button class="btn-agregar" onclick="agregarFila()">
+          + Agregar producto
+        </button>
 
         <div class="caja-total">
-            <span>💰 Total</span>
-            <strong id="total">$0</strong>
+          <span>💰 Total</span>
+          <strong id="total">$0</strong>
         </div>
 
         <div class="campo">
-            <label>Notas (opcional)</label>
-            <input type="text" id="notas" placeholder="Ej: cliente frecuente...">
+          <label>Notas (opcional)</label>
+          <input
+            type="text"
+            id="notas"
+            placeholder="Ej: cliente frecuente..."
+          />
         </div>
 
         <div class="row g-3 mt-2">
-            <div class="col-md-4">
-                <button class="btn-secundario" onclick="limpiar()">Limpiar</button>
-            </div>
-            <div class="col-md-8">
-                <button class="btn-principal" onclick="guardarVenta()">✅ Guardar venta</button>
-            </div>
+          <div class="col-md-4">
+            <button class="btn-secundario" onclick="limpiar()">Limpiar</button>
+          </div>
+          <div class="col-md-8">
+            <button class="btn-principal" onclick="guardarVenta()">
+              ✅ Guardar venta
+            </button>
+          </div>
         </div>
-    </div>
+      </div>
+    </main>
 
-</main>
-
-<script>
-    const PRODUCTOS = {
-        "👕 Camisetas": {
-            "Camiseta básica blanca_85000": "Camiseta básica blanca — $85.000",
-            "Camiseta polo verde_110000": "Camiseta polo verde — $110.000"
+    <script>
+      const PRODUCTOS = {
+        "👕 Polos": {
+          "Camiseta básica blanca_85000": "Camiseta básica blanca — $85.000",
+          "Camiseta polo verde_110000": "Camiseta polo verde — $110.000",
         },
         "🧥 Chaquetas": {
-            "Chaqueta cuero negra_350000": "Chaqueta cuero negra — $350.000",
-            "Chaqueta denim azul_280000": "Chaqueta denim azul — $280.000"
+          "Chaqueta cuero negra_350000": "Chaqueta cuero negra — $350.000",
+          "Chaqueta denim azul_280000": "Chaqueta denim azul — $280.000",
         },
         "👖 Jeans": {
-            "Jean slim fit azul_195000": "Jean slim fit azul — $195.000",
-            "Jean straight negro_210000": "Jean straight negro — $210.000"
+          "Jean slim fit azul_195000": "Jean slim fit azul — $195.000",
+          "Jean straight negro_210000": "Jean straight negro — $210.000",
         },
         "👟 Calzado": {
-            "Zapatos mocasín café_320000": "Zapatos mocasín café — $320.000",
-            "Zapatos sneaker blanco_260000": "Zapatos sneaker blanco — $260.000"
+          "Zapatos mocasín café_320000": "Zapatos mocasín café — $320.000",
+          "Zapatos sneaker blanco_260000": "Zapatos sneaker blanco — $260.000",
         },
         "👜 Accesorios": {
-            "Cinturón cuero marrón_95000": "Cinturón cuero marrón — $95.000",
-            "Bolso kiut negro_180000": "Bolso bandolera negro — $180.000",
-            "Gorra bordada verde_75000": "Gorra bordada verde — $75.000",
-            "Perfume Chevignon 100ml_230000": "Perfume Chevignon 100ml — $230.000"
-        }
-    };
+          "Cinturón cuero marrón_95000": "Cinturón cuero marrón — $95.000",
+          "Bolso kiut negro_180000": "Bolso bandolera negro — $180.000",
+          "Gorra bordada verde_75000": "Gorra bordada verde — $75.000",
+          "Perfume Chevignon 100ml_230000":
+            "Perfume Chevignon 100ml — $230.000",
+        },
+      };
 
-    const Toast = Swal.mixin({
-        toast: true, position: 'top-end',
-        showConfirmButton: false, timer: 3000, timerProgressBar: true,
-        didOpen: (t) => { t.onmouseenter = Swal.stopTimer; t.onmouseleave = Swal.resumeTimer; }
-    });
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (t) => {
+          t.onmouseenter = Swal.stopTimer;
+          t.onmouseleave = Swal.resumeTimer;
+        },
+      });
 
-    // ──  para actualizar botón ──
-    function actualizarBtn(txtId, inputId, emoji, valor, texto) {
+      // ──  para actualizar botón ──
+      function actualizarBtn(txtId, inputId, emoji, valor, texto) {
         document.getElementById(inputId).value = valor;
         document.getElementById(txtId).textContent = texto;
-        document.getElementById(txtId).style.color = '#1a3a2a';
-    }
+        document.getElementById(txtId).style.color = "#1a3a2a";
+      }
 
-    window.addEventListener('load', () => {
-        const sesion = JSON.parse(localStorage.getItem('sesion') || 'null');
+      window.addEventListener("load", () => {
+        const sesion = JSON.parse(localStorage.getItem("sesion") || "null");
         if (sesion) {
-            document.getElementById('nombre-usr').textContent = sesion.nombre + ' ' + sesion.apellido.charAt(0) + '.';
-            document.getElementById('avatar').textContent = sesion.nombre.charAt(0) + sesion.apellido.charAt(0);
+          document.getElementById("nombre-usr").textContent =
+            sesion.nombre + " " + sesion.apellido.charAt(0) + ".";
+          document.getElementById("avatar").textContent =
+            sesion.nombre.charAt(0) + sesion.apellido.charAt(0);
         }
         agregarFila();
-    });
+      });
 
-    async function elegirVendedor() {
+      async function elegirVendedor() {
         const { value: v } = await Swal.fire({
-            title: '👤 Selecciona un vendedor',
-            input: 'select',
-            inputOptions: {
-                'Colaboradores': {
-                    'Julieth Tuberquia': ' Julieth Tuberquia',
-                    'Ismaela Ocampo':   ' Ismael Ocampo',
-                    'Sofia Tuberquia':  ' Sofia Tuberquia',
-                    'Johana Vargas':  'Johana Vargas',
-                    'Antonio Palacios':  'Antonio Palacios'
-                }
+          title: "👤 Selecciona un vendedor",
+          input: "select",
+          inputOptions: {
+            Colaboradores: {
+              "Julieth Tuberquia": " Julieth Tuberquia",
+              "Ismael Ocampo": " Ismael Ocampo",
+              "Sofia Tuberquia": " Sofia Tuberquia",
+              "Johana Vargas": "Johana Vargas",
+              "Antonio Palacios": "Antonio Palacios",
             },
-            inputPlaceholder: ' Elige un vendedor ',
-            showCancelButton: true,
-            confirmButtonColor: '#2d6a4f',
-            cancelButtonColor: '#95d5b2',
-            inputValidator: (v) => !v && 'Selecciona un vendedor '
+          },
+          inputPlaceholder: " Elige un vendedor ",
+          showCancelButton: true,
+          confirmButtonColor: "#2d6a4f",
+          cancelButtonColor: "#95d5b2",
+          inputValidator: (v) => !v && "Selecciona un vendedor ",
         });
         if (v) {
-            actualizarBtn('txt-vendedor', 'vendedor', '👤', v, v);
-            Toast.fire({ icon: 'success', title: `Vendedor: ${v}` });
+          actualizarBtn("txt-vendedor", "vendedor", "👤", v, v);
+          Toast.fire({ icon: "success", title: `Vendedor: ${v}` });
         }
-    }
+      }
 
-    async function elegirFecha() {
+      async function elegirFecha() {
         const { value: fecha } = await Swal.fire({
-            title: '📅 Fecha de la venta',
-            input: 'date',
-            confirmButtonText: 'Confirmar',
-            confirmButtonColor: '#2d6a4f',
-            showCancelButton: true,
-            cancelButtonColor: '#95d5b2',
-            didOpen: () => {
-                const hoy = new Date().toISOString().split('T')[0];
-                Swal.getInput().max = hoy;
-                Swal.getInput().value = hoy;
-            }
+          title: "📅 Fecha de la venta",
+          input: "date",
+          confirmButtonText: "Confirmar",
+          confirmButtonColor: "#2d6a4f",
+          showCancelButton: true,
+          cancelButtonColor: "#95d5b2",
+          didOpen: () => {
+            const hoy = new Date().toISOString().split("T")[0];
+            Swal.getInput().max = hoy;
+            Swal.getInput().value = hoy;
+          },
         });
         if (fecha) {
-            actualizarBtn('txt-fecha', 'fecha-valor', '📅', fecha, formatFecha(fecha));
-            Toast.fire({ icon: 'success', title: 'Fecha: ' + formatFecha(fecha) });
+          actualizarBtn(
+            "txt-fecha",
+            "fecha-valor",
+            "📅",
+            fecha,
+            formatFecha(fecha),
+          );
+          Toast.fire({
+            icon: "success",
+            title: "Fecha: " + formatFecha(fecha),
+          });
         }
-    }
+      }
 
-    async function elegirLocal() {
+      async function elegirLocal() {
         const { value: local } = await Swal.fire({
-            title: ' Selecciona el local',
-            input: 'select',
-            inputOptions: {
-                'Centro Comercial Sandiego': {
-                    'Sandiego — Local 12': '🏪 Local 12',
-                    'Sandiego — Local 24': '🏪 Local 24',
-                    'Sandiego — Local 31': '🏪 Local 31'
-                },
-                'Otros': {
-                    'El Tesoro — Local 5': '🏪 El Tesoro L5',
-                    'Oviedo — Local 8':   '🏪 Oviedo L8'
-                }
+          title: " Selecciona el local",
+          input: "select",
+          inputOptions: {
+            "Centro Comercial Sandiego": {
+              "Sandiego — Local 12": "Local 12",
+              "Sandiego — Local 24": "Local 24",
+              "Sandiego — Local 31": "Local 31",
             },
-            inputPlaceholder: 'Elige el local ',
-            showCancelButton: true,
-            confirmButtonColor: '#2d6a4f',
-            cancelButtonColor: '#95d5b2',
-            inputValidator: (v) => !v && 'Selecciona un local '
+            Otros: {
+              "El Tesoro — Local 5": " El Tesoro L5",
+              "Oviedo — Local 8": " Oviedo L8",
+            },
+          },
+          inputPlaceholder: "Elige el local ",
+          showCancelButton: true,
+          confirmButtonColor: "#2d6a4f",
+          cancelButtonColor: "#95d5b2",
+          inputValidator: (v) => !v && "Selecciona un local ",
         });
         if (local) {
-            actualizarBtn('txt-local', 'local', '🏪', local, local);
-            Toast.fire({ icon: 'success', title: `Local: ${local}` });
+          actualizarBtn("txt-local", "local", local, local);
+          Toast.fire({ icon: "success", title: `Local: ${local}` });
         }
-    }
+      }
 
-    async function elegirPago() {
+      async function elegirPago() {
         const { value: pago } = await Swal.fire({
-            title: '💳 Método de pago',
-            input: 'select',
-            inputOptions: {
-                'Efectivo': { 'Efectivo': '💵 Efectivo' },
-                'Tarjetas': {
-                    'Tarjeta débito':  '💳 Tarjeta débito',
-                    'Tarjeta crédito': '💳 Tarjeta crédito'
-                },
-                'Digital': { 'Transferencia': '📱 Transferencia',
-                             'Codigo QR ': '👨‍💻 Codigo QR'
-
-                 }
+          title: "💳 Método de pago",
+          input: "select",
+          inputOptions: {
+            Efectivo: { Efectivo: "💵 Efectivo" },
+            Tarjetas: {
+              "Tarjeta débito": "💳 Tarjeta débito",
+              "Tarjeta crédito": "💳 Tarjeta crédito",
             },
-            inputPlaceholder: ' Elige el método ',
-            showCancelButton: true,
-            confirmButtonColor: '#2d6a4f',
-            cancelButtonColor: '#95d5b2',
-            inputValidator: (v) => !v && 'Selecciona un método de pago '
+            Digital: {
+              Transferencia: "📱 Transferencia",
+              "Codigo QR ": "👨‍💻 Codigo QR",
+            },
+          },
+          inputPlaceholder: " Elige el método ",
+          showCancelButton: true,
+          confirmButtonColor: "#2d6a4f",
+          cancelButtonColor: "#95d5b2",
+          inputValidator: (v) => !v && "Selecciona un método de pago ",
         });
         if (pago) {
-            actualizarBtn('txt-pago', 'pago', '💳', pago, pago);
-            Toast.fire({ icon: 'success', title: `Pago: ${pago}` });
+          actualizarBtn("txt-pago", "pago", "💳", pago, pago);
+          Toast.fire({ icon: "success", title: `Pago: ${pago}` });
         }
-    }
+      }
 
-    function agregarFila() {
+      function agregarFila() {
         const id = Date.now();
-        const fila = document.createElement('div');
-        fila.className = 'fila-prod';
-        fila.id = 'fila-' + id;
+        const fila = document.createElement("div");
+        fila.className = "fila-prod";
+        fila.id = "fila-" + id;
         fila.innerHTML = `
             <button type="button" onclick="elegirProducto(${id})"
                 style="padding:9px 12px;border:1.5px solid #cce0d4;border-radius:10px;
@@ -300,143 +389,203 @@
                        color:#1a3a2a;font-weight:600;">
             <button class="btn-quitar" onclick="quitarFila(${id})">✕</button>
         `;
-        document.getElementById('lista-productos').appendChild(fila);
-    }
+        document.getElementById("lista-productos").appendChild(fila);
+      }
 
-    async function elegirProducto(id) {
+      async function elegirProducto(id) {
         const { value: sel } = await Swal.fire({
-            title: '🛍 Selecciona un producto',
-            input: 'select',
-            inputOptions: PRODUCTOS,
-            inputPlaceholder: '— Elige una categoría y producto —',
-            showCancelButton: true,
-            confirmButtonColor: '#2d6a4f',
-            cancelButtonColor: '#95d5b2',
-            inputValidator: (v) => !v && 'Selecciona un producto '
+          title: "🛍 Selecciona un producto",
+          input: "select",
+          inputOptions: PRODUCTOS,
+          inputPlaceholder: "— Elige una categoría y producto —",
+          showCancelButton: true,
+          confirmButtonColor: "#2d6a4f",
+          cancelButtonColor: "#95d5b2",
+          inputValidator: (v) => !v && "Selecciona un producto ",
         });
         if (sel) {
-            const partes = sel.split('_');
-            const nombre = partes[0];
-            const precio = parseInt(partes[1]);
-            document.getElementById('nprod-' + id).textContent = nombre;
-            document.getElementById('nprod-' + id).style.color = '#1a3a2a';
-            document.getElementById('precio-' + id).value = precio;
-            document.getElementById('preciotxt-' + id).value = '$' + precio.toLocaleString('es-CO');
-            calcularTotal();
-            Toast.fire({ icon: 'success', title: `"${nombre}" agregado` });
+          const partes = sel.split("_");
+          const nombre = partes[0];
+          const precio = parseInt(partes[1]);
+          document.getElementById("nprod-" + id).textContent = nombre;
+          document.getElementById("nprod-" + id).style.color = "#1a3a2a";
+          document.getElementById("precio-" + id).value = precio;
+          document.getElementById("preciotxt-" + id).value =
+            "$" + precio.toLocaleString("es-CO");
+          calcularTotal();
+          Toast.fire({ icon: "success", title: `"${nombre}" agregado` });
         }
-    }
+      }
 
-    function quitarFila(id) {
-        if (document.querySelectorAll('.fila-prod').length <= 1) {
-            Toast.fire({ icon: 'info', title: 'Debe haber al menos un producto' });
-            return;
+      function quitarFila(id) {
+        if (document.querySelectorAll(".fila-prod").length <= 1) {
+          Toast.fire({
+            icon: "info",
+            title: "Debe haber al menos un producto",
+          });
+          return;
         }
-        document.getElementById('fila-' + id).remove();
+        document.getElementById("fila-" + id).remove();
         calcularTotal();
-    }
+      }
 
-    function calcularTotal() {
+      function calcularTotal() {
         let total = 0;
-        document.querySelectorAll('.fila-prod').forEach(fila => {
-            const id = fila.id.replace('fila-', '');
-            const precio = parseInt(document.getElementById('precio-' + id)?.value) || 0;
-            const cant = parseInt(document.getElementById('cant-' + id)?.value) || 1;
-            total += precio * cant;
+        document.querySelectorAll(".fila-prod").forEach((fila) => {
+          const id = fila.id.replace("fila-", "");
+          const precio =
+            parseInt(document.getElementById("precio-" + id)?.value) || 0;
+          const cant =
+            parseInt(document.getElementById("cant-" + id)?.value) || 1;
+          total += precio * cant;
         });
-        document.getElementById('total').textContent = '$' + total.toLocaleString('es-CO');
-    }
+        document.getElementById("total").textContent =
+          "$" + total.toLocaleString("es-CO");
+      }
 
-    async function guardarVenta() {
-        const vendedor = document.getElementById('vendedor').value;
-        const fecha = document.getElementById('fecha-valor').value;
-        const local = document.getElementById('local').value;
-        const pago = document.getElementById('pago').value;
+      async function guardarVenta() {
+        const vendedor = document.getElementById("vendedor").value;
+        const fecha = document.getElementById("fecha-valor").value;
+        const local = document.getElementById("local").value;
+        const pago = document.getElementById("pago").value;
 
         if (!vendedor || !fecha || !local || !pago) {
-            Swal.fire({ icon: 'warning', title: '¡Faltan datos!', text: 'Completa todos los campos (*)', confirmButtonColor: '#2d6a4f' });
-            return;
+          Swal.fire({
+            icon: "warning",
+            title: "¡Faltan datos!",
+            text: "Completa todos los campos (*)",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
         const productos = [];
         let error = false;
         let total = 0;
 
-        document.querySelectorAll('.fila-prod').forEach(fila => {
-            const id = fila.id.replace('fila-', '');
-            const nombre = document.getElementById('nprod-' + id)?.textContent;
-            const precio = parseInt(document.getElementById('precio-' + id)?.value) || 0;
-            const cant = parseInt(document.getElementById('cant-' + id)?.value) || 1;
-            if (!nombre || nombre === 'Seleccionar producto' || precio === 0) { error = true; return; }
-            productos.push({ nombre, cantidad: cant, precio, subtotal: precio * cant });
-            total += precio * cant;
+        document.querySelectorAll(".fila-prod").forEach((fila) => {
+          const id = fila.id.replace("fila-", "");
+          const nombre = document.getElementById("nprod-" + id)?.textContent;
+          const precio =
+            parseInt(document.getElementById("precio-" + id)?.value) || 0;
+          const cant =
+            parseInt(document.getElementById("cant-" + id)?.value) || 1;
+          if (!nombre || nombre === "Seleccionar producto" || precio === 0) {
+            error = true;
+            return;
+          }
+          productos.push({
+            nombre,
+            cantidad: cant,
+            precio,
+            subtotal: precio * cant,
+          });
+          total += precio * cant;
         });
 
         if (error) {
-            Swal.fire({ icon: 'warning', title: 'Hay productos sin seleccionar', confirmButtonColor: '#2d6a4f' });
-            return;
+          Swal.fire({
+            icon: "warning",
+            title: "Hay productos sin seleccionar",
+            confirmButtonColor: "#2d6a4f",
+          });
+          return;
         }
 
         const ok = await Swal.fire({
-            title: '¿Guardar esta venta?',
-            html: `<div style="text-align:left;line-height:2;font-size:0.9rem">
+          title: "¿Guardar esta venta?",
+          html: `<div style="text-align:left;line-height:2;font-size:0.9rem">
                 <b>Vendedor:</b> ${vendedor}<br>
                 <b>Fecha:</b> ${formatFecha(fecha)}<br>
                 <b>Local:</b> ${local}<br>
                 <b>Pago:</b> ${pago}<br>
-                <b>Total:</b> <span style="color:#2d6a4f;font-weight:700;font-size:1.1rem">$${total.toLocaleString('es-CO')}</span>
+                <b>Total:</b> <span style="color:#2d6a4f;font-weight:700;font-size:1.1rem">$${total.toLocaleString("es-CO")}</span>
             </div>`,
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#2d6a4f',
-            cancelButtonColor: '#95d5b2',
-            confirmButtonText: '✅ Guardar',
-            cancelButtonText: 'Revisar'
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#2d6a4f",
+          cancelButtonColor: "#95d5b2",
+          confirmButtonText: "✅ Guardar",
+          cancelButtonText: "Revisar",
         });
 
         if (!ok.isConfirmed) return;
 
-        const ventas = JSON.parse(localStorage.getItem('ventas') || '[]');
-        ventas.push({ id: ventas.length + 1, vendedor, fecha, local, pago, productos, total, notas: document.getElementById('notas').value });
-        localStorage.setItem('ventas', JSON.stringify(ventas));
+        const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
+        ventas.push({
+          id: ventas.length + 1,
+          vendedor,
+          fecha,
+          local,
+          pago,
+          productos,
+          total,
+          notas: document.getElementById("notas").value,
+        });
+        localStorage.setItem("ventas", JSON.stringify(ventas));
 
-        Toast.fire({ icon: 'success', title: `Venta guardada: $${total.toLocaleString('es-CO')} ` });
-
-        const r = await Swal.fire({
-            icon: 'success', title: '¡Venta registrada! ',
-            text: `Total: $${total.toLocaleString('es-CO')}`,
-            confirmButtonColor: '#2d6a4f', confirmButtonText: 'Ver dashboard',
-            showCancelButton: true, cancelButtonText: 'Registrar otra', cancelButtonColor: '#95d5b2'
+        Toast.fire({
+          icon: "success",
+          title: `Venta guardada: $${total.toLocaleString("es-CO")} `,
         });
 
-        r.isConfirmed ? window.location.href = 'home.html' : limpiar();
-    }
+        const r = await Swal.fire({
+          icon: "success",
+          title: "¡Venta registrada! ",
+          text: `Total: $${total.toLocaleString("es-CO")}`,
+          confirmButtonColor: "#2d6a4f",
+          confirmButtonText: "Ver dashboard",
+          showCancelButton: true,
+          cancelButtonText: "Registrar otra",
+          cancelButtonColor: "#95d5b2",
+        });
 
-    function limpiar() {
-        ['vendedor','fecha-valor','local','pago'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('txt-vendedor').textContent = 'Seleccionar vendedor';
-        document.getElementById('txt-fecha').textContent    = 'Seleccionar fecha';
-        document.getElementById('txt-local').textContent    = 'Seleccionar local';
-        document.getElementById('txt-pago').textContent     = 'Seleccionar método';
-        ['txt-vendedor','txt-fecha','txt-local','txt-pago'].forEach(id => document.getElementById(id).style.color = '#5a6e61');
-        document.getElementById('notas').value = '';
-        document.getElementById('lista-productos').innerHTML = '';
-        document.getElementById('total').textContent = '$0';
+        r.isConfirmed ? (window.location.href = "home.html") : limpiar();
+      }
+
+      function limpiar() {
+        ["vendedor", "fecha-valor", "local", "pago"].forEach(
+          (id) => (document.getElementById(id).value = ""),
+        );
+        document.getElementById("txt-vendedor").textContent =
+          "Seleccionar vendedor";
+        document.getElementById("txt-fecha").textContent = "Seleccionar fecha";
+        document.getElementById("txt-local").textContent = "Seleccionar local";
+        document.getElementById("txt-pago").textContent = "Seleccionar método";
+        ["txt-vendedor", "txt-fecha", "txt-local", "txt-pago"].forEach(
+          (id) => (document.getElementById(id).style.color = "#5a6e61"),
+        );
+        document.getElementById("notas").value = "";
+        document.getElementById("lista-productos").innerHTML = "";
+        document.getElementById("total").textContent = "$0";
         agregarFila();
-    }
+      }
 
-    function formatFecha(f) {
-        const [y, m, d] = f.split('-');
-        const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-        return `${d} ${meses[m-1]} ${y}`;
-    }
+      function formatFecha(f) {
+        const [y, m, d] = f.split("-");
+        const meses = [
+          "Ene",
+          "Feb",
+          "Mar",
+          "Abr",
+          "May",
+          "Jun",
+          "Jul",
+          "Ago",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dic",
+        ];
+        return `${d} ${meses[m - 1]} ${y}`;
+      }
 
-    function cerrarSesion() {
-        localStorage.removeItem('sesion');
-        window.location.href = 'login.html';
-    }
-</script>
+      function cerrarSesion() {
+        localStorage.removeItem("sesion");
+        window.location.href = "login.html";
+      }
+    </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
